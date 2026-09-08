@@ -123,3 +123,17 @@ review and added below (see **Step 2 additions**, marked ✏️).
 
 - `kudos.db` is excluded from version control (`.gitignore`) since it's generated data, not source code — a fresh instance seeds itself automatically on first run.
 - Environment variable `PORT` can override the default port (3000) for deployment behind a reverse proxy.
+
+## Reflection
+
+**How did the structured approach to specification change your development process compared to traditional coding?**
+
+Normally the request would have gone straight to code — that's the "vibe coding" this exercise contrasts with. Instead, the AI produced a draft spec first (user stories, database schema, API endpoints) before any code existed. That surfaced a real gap — no content moderation at all — while it was still just a table in a document, not code that would need to be restructured later. Catching it at the spec stage meant the database schema, API routes, and frontend admin panel were all designed together and consistently, instead of moderation being bolted on afterward.
+
+**What was the most challenging part of reviewing and refining the AI-generated specification?**
+
+Thinking through moderation's actual mechanics rather than just adding the headline requirement. It's easy to write "admins can delete bad kudos," but the harder part was the follow-on questions: should deleting be permanent or reversible? Who's accountable for a moderation action, and should that be recorded? What happens to duplicate or borderline-spam kudos — auto-block them, or leave it to human judgment? That's why the schema ended up with `is_visible`, `moderated_by`, `moderated_at`, and `reason_for_moderation` instead of just a delete button, and why the spec explicitly treats duplicates as a case for admin review rather than an automatic rejection.
+
+**How did having a complete specification before implementation affect the quality and completeness of the final code?**
+
+The implementation had no rework loop — every piece (schema fields, the three admin API endpoints, the server-side permission check, the admin UI panel) was built once, directly from what the spec already called for, because the spec had already settled the hard questions. It also meant the security requirement — that the server independently re-checks admin status rather than trusting the frontend — was designed in from the start and could be directly tested (a non-admin hitting an admin endpoint returns `403`), rather than discovered as a gap after the fact.
