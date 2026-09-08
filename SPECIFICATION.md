@@ -1,5 +1,7 @@
 # Kudos System Specification
 
+**Repository:** https://github.com/PrasadGithubuser/kudos-system
+
 *Status: Approved. This is the final specification used to generate the implementation in this repository.*
 
 ## Background
