@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kudos</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="wordmark">Kudos</div>
+    <div class="identity">
+      <label for="current-user">Acting as</label>
+      <select id="current-user"></select>
+    </div>
+  </header>
+
+  <main>
+    <section class="panel give-panel">
+      <h1>Give someone a kudos</h1>
+      <form id="kudos-form">
+        <label for="recipient">Colleague</label>
+        <select id="recipient" required></select>
+
+        <label for="message">Message</label>
+        <textarea id="message" maxlength="500" rows="4" placeholder="What did they do well?" required></textarea>
+        <div class="char-count"><span id="char-count">0</span>/500</div>
+
+        <button type="submit">Send kudos</button>
+        <p id="form-error" class="error" hidden></p>
+      </form>
+    </section>
+
+    <section class="panel feed-panel">
+      <div class="feed-header">
+        <h1>Recent kudos</h1>
+        <button id="refresh-feed" type="button" class="ghost-button">Refresh</button>
+      </div>
+      <ul id="feed" class="feed"></ul>
+      <p id="feed-empty" class="empty" hidden>No kudos yet. Be the first to send one.</p>
+    </section>
+
+    <section class="panel admin-panel" id="admin-panel" hidden>
+      <h1>Admin: moderate kudos</h1>
+      <p class="admin-hint">Visible only to admins. Hidden kudos are removed from the public feed but kept on record.</p>
+      <ul id="admin-list" class="admin-list"></ul>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

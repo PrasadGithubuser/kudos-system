@@ -1,0 +1,256 @@
+/* Token system
+   Color:
+     --paper:   #FAF8F3  background
+     --ink:     #22262B  primary text
+     --ink-dim: #6B6F76  secondary text
+     --line:    #DEDAD0  dividers/borders
+     --teal:    #2F6F5E  primary action (give kudos)
+     --brick:   #A5443F  admin / destructive actions
+   Type:
+     Headings: Georgia (serif) - warm, human, no external font dependency
+     Body/UI:  system-ui sans stack
+   Layout: single left-aligned column, max-width ~720px, divided lists
+   instead of shadowed cards.
+*/
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #FAF8F3;
+  color: #22262B;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.5;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 2rem;
+  border-bottom: 1px solid #DEDAD0;
+}
+
+.wordmark {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2F6F5E;
+}
+
+.identity {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  color: #6B6F76;
+}
+
+.identity select {
+  font-size: 0.95rem;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid #DEDAD0;
+  border-radius: 4px;
+  background: #fff;
+}
+
+main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+}
+
+.panel {
+  margin-bottom: 3rem;
+}
+
+.panel h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0 0 1rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+label {
+  font-size: 0.85rem;
+  color: #6B6F76;
+  margin-top: 0.6rem;
+}
+
+select,
+textarea {
+  font: inherit;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid #DEDAD0;
+  border-radius: 4px;
+  background: #fff;
+  color: #22262B;
+  resize: vertical;
+}
+
+textarea:focus,
+select:focus,
+button:focus-visible {
+  outline: 2px solid #2F6F5E;
+  outline-offset: 2px;
+}
+
+.char-count {
+  align-self: flex-end;
+  font-size: 0.8rem;
+  color: #6B6F76;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+#kudos-form button[type="submit"] {
+  margin-top: 0.8rem;
+  align-self: flex-start;
+  background: #2F6F5E;
+  color: #fff;
+  border: none;
+  padding: 0.65rem 1.4rem;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+#kudos-form button[type="submit"]:hover {
+  background: #275c4d;
+}
+
+.ghost-button {
+  background: none;
+  border: 1px solid #DEDAD0;
+  padding: 0.4rem 0.9rem;
+  border-radius: 4px;
+  color: #22262B;
+  font-size: 0.85rem;
+}
+
+.ghost-button:hover {
+  border-color: #2F6F5E;
+  color: #2F6F5E;
+}
+
+.error {
+  color: #A5443F;
+  font-size: 0.9rem;
+  margin: 0.4rem 0 0;
+}
+
+.feed-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.feed,
+.admin-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid #DEDAD0;
+}
+
+.feed li,
+.admin-list li {
+  padding: 1rem 0;
+  border-bottom: 1px solid #DEDAD0;
+}
+
+.kudos-line {
+  font-size: 1rem;
+}
+
+.kudos-line strong {
+  font-weight: 600;
+}
+
+.kudos-message {
+  margin: 0.3rem 0 0.2rem;
+}
+
+.kudos-meta {
+  font-size: 0.8rem;
+  color: #6B6F76;
+}
+
+.empty {
+  color: #6B6F76;
+  padding: 1rem 0;
+}
+
+.admin-hint {
+  font-size: 0.9rem;
+  color: #6B6F76;
+  margin: -0.4rem 0 1rem;
+}
+
+.admin-list li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.admin-list li.hidden-item {
+  border-left: 3px solid #A5443F;
+  padding-left: 0.8rem;
+}
+
+.admin-list li.visible-item {
+  border-left: 3px solid #2F6F5E;
+  padding-left: 0.8rem;
+}
+
+.admin-actions {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.admin-actions button {
+  font-size: 0.82rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 4px;
+  border: 1px solid #DEDAD0;
+  background: #fff;
+}
+
+.admin-actions .hide-btn:hover {
+  border-color: #A5443F;
+  color: #A5443F;
+}
+
+.admin-actions .unhide-btn:hover,
+.admin-actions .delete-btn:hover {
+  border-color: #2F6F5E;
+  color: #2F6F5E;
+}
+
+.admin-actions .delete-btn:hover {
+  border-color: #A5443F;
+  color: #A5443F;
+}
+
+.moderation-note {
+  font-size: 0.8rem;
+  color: #A5443F;
+}
+
+@media (max-width: 480px) {
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+}
